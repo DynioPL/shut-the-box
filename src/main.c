@@ -62,7 +62,7 @@ int main(void) {
 			}
 		}
 	}
-
+	// TODO: Add condition for having only 1 tile below 6.
 	return 0;
 }
 
