@@ -8,9 +8,9 @@ This project **IS NOT** complete. It will be updated.
 
 Use `<your-c-compiler> main.c -o shut-the-box` to compile the program.
 ### Examples:
-> GCC:
+GCC:
 `gcc main.c -o shut-the-box`
-> Clang:
+Clang:
 `clang main.c -o shut-the-box`
-> CC (universal, could be clang or gcc, depends on your distro/system configuration)
+CC (universal, could be clang or gcc, depends on your distro/system configuration)
 `cc main -o shut-the-box`
