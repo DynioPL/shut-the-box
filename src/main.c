@@ -36,7 +36,7 @@ int main(void)
 		printf("|\n");
 		
 		if (b_sum == 0) {
-			printf("Congratulations, You won! All tiles are shuted.\n");
+			printf("Congratulations, You won! All tiles are shut.\n");
 			printf("Another round? [y/N]: ");
 
 			char ch;
@@ -54,7 +54,7 @@ int main(void)
 
 		if (!check_dice()) {
 			int d_ch;
-			printf("Looks like you have 7-9 tiles shuted. Would you like to use 1 dice or 2 dice? (type 1 or 2)\n");
+			printf("Looks like you have 7-9 tiles shut. Would you like to use 1 dice or 2 dice? (type 1 or 2)\n");
 			// Workaround because I don't want to use goto :P
 			while (true) {
 				scanf("%d", &d_ch);
@@ -88,7 +88,7 @@ int main(void)
 		bool possible = check_tiles(d_sum);
 	
 		if (possible == false) {
-			printf("Looks like you can't make sum from remaining tiles. Game over!\n");
+			printf("Looks like you can't make a sum from the remaining tiles. Game over!\n");
 			printf("Your score: %d\n", b_sum);
 			printf("Another round? [y/N]: ");
 		
@@ -114,14 +114,14 @@ int main(void)
 			scanf("%d", &num);
 
 			if (num > 9 || num < 0) {
-				printf("Please enter correct tile to shut.\n");
+				printf("Please enter correct tile number\n");
 			}
 			else if (b[num - 1].c == 'X') {
-				printf("This tile is already shuted. try again.\n");
+				printf("This tile is already shut. try again.\n");
 				num = 0;
 			}
 			else if ((sum + num) > d_sum) {
-				printf("Your sum is bigger than die's sum. Try again.\n");
+				printf("Your sum is bigger than dice sum. Try again.\n");
 			}
 			else if (num == 0) {
 				printf("Thank you for playing!\n");
@@ -152,12 +152,12 @@ void reset()
 
 bool check_dice()
 {
-	int is_shuted = 0;
+	int is_shut = 0;
 	for (int i = 6; i < 9; i++) {
 		if (b[i].val == 0)
-			is_shuted++;
+			is_shut++;
 	}
-	if (is_shuted == 3)
+	if (is_shut == 3)
 		return false;
 	return true;
 }
@@ -179,7 +179,7 @@ bool check_tiles(int d_sum)
 				int d_sum_half_ceil = ceilf(((float)d_sum / 2));
 				int d_sum_half_floor = floorf(((float)d_sum / 2));
 				// Main part of algorythm. This loop will execute until a possible combination of numbers is found or until no possible combination is found.
-				// We're testing if the sum of remaining tiles is equal to drawn by the dice (value of shuted tile should be 0).
+				// We're testing if the sum of remaining tiles is equal to drawn by the dice (value of shut tile should be 0).
 				// The operation vary between odd and even numbers. If the number is odd, we need to include endpoint of interval in loop declaration. Otherwise, we need to exclude it.
 				// In the combination is found, set the value of boolean variable to true and break the loop. Otherwise, set to false and try another combination.
 				
