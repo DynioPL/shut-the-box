@@ -15,7 +15,8 @@ void reset();
 bool check_dice();
 bool check_tiles(int);
 
-int main(void) {
+int main(void)
+{
 	int num, sum, b_sum;
 	unsigned int d1, d2, d_sum;
 
@@ -34,9 +35,26 @@ int main(void) {
 		}
 		printf("|\n");
 		
+		if (b_sum == 0) {
+			printf("Congratulations, You won! All tiles are shuted.\n");
+			printf("Another round? [y/N]: ");
+
+			char ch;
+			scanf(" %c", &ch);
+			if (ch == 'Y' || ch == 'y') {
+				reset();
+				fflush(stdin);
+				continue;
+			}
+			else {
+				printf("Thank you for playing!\n");
+				exit(0);				
+			}
+		}
+
 		if (!check_dice()) {
 			int d_ch;
-			printf("Looks like you have 7-9 tiles shuted. Would you like to use 1 dice or 2 die? (type 1 or 2)\n");
+			printf("Looks like you have 7-9 tiles shuted. Would you like to use 1 dice or 2 dice? (type 1 or 2)\n");
 			// Workaround because I don't want to use goto :P
 			while (true) {
 				scanf("%d", &d_ch);
@@ -72,7 +90,7 @@ int main(void) {
 		if (possible == false) {
 			printf("Looks like you can't make sum from remaining tiles. Game over!\n");
 			printf("Your score: %d\n", b_sum);
-			printf("Another round? [y/N]\n");
+			printf("Another round? [y/N]: ");
 		
 			// scanning for char input is in my nightmares.
 			char ch;
@@ -122,7 +140,8 @@ int main(void) {
 
 }
 
-void reset() {
+void reset()
+{
 	char a = '1';
 	for (int i = 0; i < 9; i++) {
 		b[i].val = i+1;
@@ -131,7 +150,8 @@ void reset() {
 	}	
 }
 
-bool check_dice() {
+bool check_dice()
+{
 	int is_shuted = 0;
 	for (int i = 6; i < 9; i++) {
 		if (b[i].val == 0)
@@ -142,7 +162,8 @@ bool check_dice() {
 	return true;
 }
 
-bool check_tiles(int d_sum) {
+bool check_tiles(int d_sum) 
+{
 	bool possible = true;
 	if (d_sum < 9) {
 		if (b[d_sum - 1].val == 0) {
@@ -158,9 +179,11 @@ bool check_tiles(int d_sum) {
 				int d_sum_half_ceil = ceilf(((float)d_sum / 2));
 				int d_sum_half_floor = floorf(((float)d_sum / 2));
 				// Main part of algorythm. This loop will execute until a possible combination of numbers is found or until no possible combination is found.
-				// We're testing if the sum of remaining tiles is equal to drawn by the dice (value of shuted tiles should be 0).
+				// We're testing if the sum of remaining tiles is equal to drawn by the dice (value of shuted tile should be 0).
 				// The operation vary between odd and even numbers. If the number is odd, we need to include endpoint of interval in loop declaration. Otherwise, we need to exclude it.
-				// In first case, set the value of boolean variable to true. Otherwise, set to false.
+				// In the combination is found, set the value of boolean variable to true and break the loop. Otherwise, set to false and try another combination.
+				
+				// For odd numbers...
 				if ((d_sum % 2) != 0) {
 					while (x >= d_sum_half_ceil && y <= d_sum_half_floor) {
 						if ((b[x - 1].val + b[y - 1].val) == d_sum) {
@@ -174,6 +197,7 @@ bool check_tiles(int d_sum) {
 						y++;
 					}
 				}
+				// ...And for even numbers
 				else {
 					while (x > d_sum_half_ceil && y < d_sum_half_floor) {
 						if ((b[x - 1].val + b[y - 1].val) == d_sum) {
@@ -230,3 +254,4 @@ bool check_tiles(int d_sum) {
 	}
 	return possible;
 }
+
