@@ -6,11 +6,11 @@ This project **IS NOT** complete. It will be updated.
 
 ## Building
 
-Use `<your-c-compiler> main.c -o shut-the-box` to compile the program.
-### Examples:
-GCC:
-`gcc main.c -o shut-the-box`  
-Clang:
-`clang main.c -o shut-the-box`  
-CC (universal, could be clang or gcc, depends on your distro/system configuration)
-`cc main -o shut-the-box`  
+### *nix (Linux, BSD...)
+`shut-the-box` comes with a Makefile for *nix userspace.
+`make`
+
+### Windows
+Either use some *nix toolchain (Cygwin, MSYS2...), or compile it manually.
+(eg. for MSVC)
+`cl /o shut-the-box '.\src\main.c'`
