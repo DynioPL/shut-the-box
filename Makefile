@@ -1,4 +1,3 @@
-// AI Generated stuff...
 
 CC = cc
 CFLAGS = -Wall -Wextra -O2 -g
