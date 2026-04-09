@@ -169,7 +169,6 @@ bool check_tiles(int d_sum)
 		if (b[d_sum - 1].val == 0) {
 			// This is the worst algorythm you will ever see.
 			// We are checking for possible combinations of 2 one digit numbers which will give us sum of dice
-			// We can't execute this algorythm if we draw a 1 or 2.
 			if (d_sum < 3)
 				possible = false;
 			else {
@@ -178,12 +177,6 @@ bool check_tiles(int d_sum)
 				int y = 1;
 				int d_sum_half_ceil = ceilf(((float)d_sum / 2));
 				int d_sum_half_floor = floorf(((float)d_sum / 2));
-				// Main part of algorythm. This loop will execute until a possible combination of numbers is found or until no possible combination is found.
-				// We're testing if the sum of remaining tiles is equal to drawn by the dice (value of shut tile should be 0).
-				// The operation vary between odd and even numbers. If the number is odd, we need to include endpoint of interval in loop declaration. Otherwise, we need to exclude it.
-				// In the combination is found, set the value of boolean variable to true and break the loop. Otherwise, set to false and try another combination.
-				
-				// For odd numbers...
 				if ((d_sum % 2) != 0) {
 					while (x >= d_sum_half_ceil && y <= d_sum_half_floor) {
 						if ((b[x - 1].val + b[y - 1].val) == d_sum) {
@@ -197,7 +190,6 @@ bool check_tiles(int d_sum)
 						y++;
 					}
 				}
-				// ...And for even numbers
 				else {
 					while (x > d_sum_half_ceil && y < d_sum_half_floor) {
 						if ((b[x - 1].val + b[y - 1].val) == d_sum) {
@@ -218,12 +210,10 @@ bool check_tiles(int d_sum)
 		}
 	}
 	else {
-		// Second part of algorythm for sum of numbers greater than 9.
 		int x = 9;
 		int y = d_sum - x;
 		int d_sum_half_ceil = ceilf(((float)d_sum / 2));
 		int d_sum_half_floor = floorf(((float)d_sum / 2));
-		// The logic remains the same.	
 		
 		if ((d_sum % 2) != 0) {
 			while (x >= d_sum_half_ceil && y <= d_sum_half_floor) {
